@@ -1,34 +1,48 @@
 console.log('JS-OK')
 /* 
-0. colleghiamo elemento dal DOM
-1. chiediamo i dati all'utente 
-2. calcola il prezzo totale del viaggio
+0. colleghiamo gli elementi della DOM
+1. Agancio event listener al btn
+1. calcola il prezzo totale del viaggio
     - 0.21€ al km
     - sconto 20% ai minorenni
     - sconto 40%  over 65
 */
-
-const outname = document.getElementById('outname');
-const button = document.getElementById('button');
-const inputkm = document.getElementById('km');
 const inputnome = document.getElementById('nome');
-const inputeta= document.getElementById('età');
-const outofferta = document.getElementById('offerta');
-let discount = null;
+const inputkm = document.getElementById('km');
+const inputeta = document.getElementById('eta');
+const button = document.getElementById('button');
+
+const outname=document.getElementById('outname');
+const outofferta= document.getElementById('offerta');
+const outprice= document.getElementById('prezzo');
+
+
 
 button.addEventListener('click', function(){
-    const km = inputkm.value;
-    const nome= inputnome.value;
-    const eta= inputeta.value; 
+    nome = inputnome.value;
+    km = inputkm.value;
+    eta = inputeta.value; 
+
+    let fullprice = km * 0.21;
+    let rateElement = 'Offerta base'
     outname.innerText= nome;
+    let price= fullprice;
+    
+    if (eta ==='minorenne'){
+        rateElement = 'Offerta giovani';
+        price = fullprice * 0.8;
+    }
+    else if (eta ==='65+'){
+        rateElement= 'Offerta anziani';
+        price = fullprice * 0.6;
+    }
+    
 
-    const fullprice= km * 0.21;
-    console.log(fullprice);
+    outofferta.innerText=rateElement;
+    outprice.innerText= '€' + price.toFixed(2) ;
 
-    if ( eta = minorenne ) discount = 20;
 
-}
-)
+})
 
 
 
